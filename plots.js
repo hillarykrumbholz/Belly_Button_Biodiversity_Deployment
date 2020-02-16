@@ -1,45 +1,82 @@
 function init() {
-    var selector = d3.select("#selDataset");
-  
-    d3.json("samples.json").then((data) => {
-      console.log(data);
-      var sampleNames = data.names;
-      sampleNames.forEach((sample) => {
-        selector
-          .append("option")
-          .text(sample)
-          .property("value", sample);
-      });
-  })}
-  
+  var selector = d3.select("#selDataset");
 
-  init();
-
-  function optionChanged(newSample) {
-    buildMetadata(newSample);
-    buildCharts(newSample);
-  }
-
-
-
-  function buildMetadata(sample) {
-    d3.json("samples.json").then((data) => {
-      var metadata = data.metadata;
-      var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
-      var result = resultArray[0];
-      var PANEL = d3.select("#sample-metadata");
-  
-      PANEL.html("");
-      PANEL.append("h6").text("ID: "+result.id);
-      PANEL.append("h6").text("ETHNICITY: "+result.ethnicity);
-      PANEL.append("h6").text("GENDER: "+result.gender);
-      PANEL.append("h6").text("AGE: "+result.age);
-      PANEL.append("h6").text("LOCATION: "+result.location);
-      PANEL.append("h6").text("BBTYPE: "+result.bbtype);
-      PANEL.append("h6").text("WFREQ: "+result.wfreq);
-    
+  d3.json("samples.json").then((data) => {
+    console.log(data);
+    var sampleNames = data.names;
+    sampleNames.forEach((sample) => {
+      selector
+        .append("option")
+        .text(sample)
+        .property("value", sample);
     });
-  }
+})}
+
+
+init();
+
+function optionChanged(newSample) {
+  buildMetadata(newSample);
+  buildCharts(newSample);
+}
+
+
+
+function buildMetadata(sample) {
+  d3.json("samples.json").then((data) => {
+    var metadata = data.metadata;
+    var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
+    var result = resultArray[0];
+    var PANEL = d3.select("#sample-metadata");
+
+    PANEL.html("");
+    PANEL.append("h6").text("ID: "+result.id);
+    PANEL.append("h6").text("Ethnicity: "+result.ethnicity);
+    PANEL.append("h6").text("Gender: "+result.gender);
+    PANEL.append("h6").text("Age: "+result.age);
+    PANEL.append("h6").text("Location: "+result.location);
+    PANEL.append("h6").text("bbtype: "+result.bbtype);
+    PANEL.append("h6").text("wfreq: "+result.wfreq);
+  
+  });
+
+function buildCharts(sample){
+  d3.json("samples.json").then((data) => {
+    var samples = data.samples;
+    var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
+
+    var sortedResults = resultArray.sort((a,b) => a.sample_values - b.sample_values).reverse();
+    var result = sortedResults[0];
+    var sampleValues = result.sample_values;
+    var otuIds = result.otu_ids;
+    var otuLabels = result.otu_labels;
+    otuIdString = otuIds.map(otuChartLabel => `OTU ${otuChartLabel}`);
+    
+    var trace = {
+      x: sampleValues.slice(0,10).reverse(),
+      y: otuIdString.slice(0,10).reverse(),
+      type: "bar",
+      orientation: "h"
+    };
+
+    var data = [trace];
+    var layout = {
+      title: "Top 10 bacterial species (OTU's)",
+      margin: {t:50, l:150}
+    };
+
+    Plotly.newPlot("bar", data, layout);
+
+
+
+    
+  });
+
+}
+
+}
+
+  
 
 
 
