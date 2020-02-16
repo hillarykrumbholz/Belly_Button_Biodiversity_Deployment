@@ -51,6 +51,11 @@ function buildCharts(sample){
     var otuIds = result.otu_ids;
     var otuLabels = result.otu_labels;
     otuIdString = otuIds.map(otuChartLabel => `OTU ${otuChartLabel}`);
+
+    var metadata = data.metadata;
+    var resultMetaArray = metadata.filter(sampleObj => sampleObj.id == sample);
+    var resultMeta = resultMetaArray[0];
+    var wfreq = resultMeta.wfreq;
     
     var trace = {
       x: sampleValues.slice(0,10).reverse(),
