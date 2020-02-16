@@ -48,6 +48,7 @@ function buildCharts(sample){
     var sampleValues = result.sample_values;
 
     var filteredData = otuIds.slice(0, 10).map(otuIdBarChart => `OTU${otuIdBarChart}`).reverse();
+
     
     var trace = {
       x: sampleValues.slice(0, 10).reverse(),
@@ -56,7 +57,7 @@ function buildCharts(sample){
       orientation: "h",
       type: "bar",
       marker: {
-        color: "mediumseagreen",
+        color: "#94d1c2",
       }
     };
     var data = [trace];
@@ -68,6 +69,33 @@ function buildCharts(sample){
     };
 
     Plotly.newPlot("bar", data, layout);
+
+    // Create a bubble chart to visuaize the relative frequency of ALL bacterial spp. found in specified individual
+    var trace1 = {
+      x: otuIds,
+      y: sampleValues,
+      text: otuLabels,
+      mode: "markers",
+      marker: {
+        color: otuIds,
+        colorscale: "YlGnBu",
+        type: "heatmap",
+        opacity: 0.5,
+        size: sampleValues,
+        sizemode: "diameter"
+      }
+    };
+
+    var data = [trace1];
+    var layout = {
+      title: "All Bacterial Species per Volunteer",
+      xaxis: { title: "OTI ID" },
+      showlegend: false,
+      height: 600,
+      width: 1300
+    };
+
+    Plotly.newPlot("bubble", data, layout)
 
 
 
