@@ -10,18 +10,12 @@ function init() {
         .text(sample)
         .property("value", sample);
     });
-})}
 
-
-init();
-
-function optionChanged(newSample) {
-  buildMetadata(newSample);
-  buildCharts(newSample);
+    optionChanged(sampleNames[0]);
+  })
 }
 
-
-
+// buildMetadata function to populate the Demographics table based upon ID number
 function buildMetadata(sample) {
   d3.json("samples.json").then((data) => {
     var metadata = data.metadata;
@@ -40,34 +34,37 @@ function buildMetadata(sample) {
   
   });
 
+}  
+
+// Create a bar chart displaying top 10 OTUs found in specified individual
 function buildCharts(sample){
   d3.json("samples.json").then((data) => {
-    var samples = data.samples;
-    var resultArray = metadata.filter(sampleObj => sampleObj.id == sample);
+    var sample_values = data.samples;
+    var resultArray = sample_values.filter(sampleData => sampleData.id == sample);
+    var result = resultArray[0];
 
-    var sortedResults = resultArray.sort((a,b) => a.sample_values - b.sample_values).reverse();
-    var result = sortedResults[0];
-    var sampleValues = result.sample_values;
     var otuIds = result.otu_ids;
     var otuLabels = result.otu_labels;
-    otuIdString = otuIds.map(otuChartLabel => `OTU ${otuChartLabel}`);
+    var sampleValues = result.sample_values;
 
-    var metadata = data.metadata;
-    var resultMetaArray = metadata.filter(sampleObj => sampleObj.id == sample);
-    var resultMeta = resultMetaArray[0];
-    var wfreq = resultMeta.wfreq;
+    var filteredData = otuIds.slice(0, 10).map(otuIdBarChart => `OTU${otuIdBarChart}`).reverse();
     
     var trace = {
-      x: sampleValues.slice(0,10).reverse(),
-      y: otuIdString.slice(0,10).reverse(),
+      x: sampleValues.slice(0, 10).reverse(),
+      y: filteredData,
+      text: otuLabels.slice(0, 10).reverse(),
+      orientation: "h",
       type: "bar",
-      orientation: "h"
+      marker: {
+        color: "mediumseagreen",
+      }
     };
-
     var data = [trace];
     var layout = {
       title: "Top 10 bacterial species (OTU's)",
-      margin: {t:50, l:150}
+      margin: {t: 30, l: 100},
+      xaxis: { title: "Sample Values"},
+
     };
 
     Plotly.newPlot("bar", data, layout);
@@ -76,10 +73,20 @@ function buildCharts(sample){
 
     
   });
-
 }
 
+function optionChanged(newSample) {
+  buildMetadata(newSample);
+  buildCharts(newSample);
 }
+
+
+
+
+init();
+
+
+
 
   
 
