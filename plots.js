@@ -103,62 +103,81 @@ function buildCharts(sample){
 }
 
 // Create a gauge chart displaying belly button washing frequency of specified individual
-function buildGauge(wfreq){
+function buildGauge(wfreq){ 
   var gauge = document.getElementById("gauge");
-
-  var traceA = {
-    type: "pie",
-    showlegend: false,
-    hole: 0.4, 
-    rotation: 90, 
-    values: [50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50],
-    text: ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", ""],
-    direction: "clockwise",
-    textinfo: "text",
-    textposition: "inside",
-    marker: {
-      colors: ["#7575d7", "#758dd7", "#75a6d7", "#75bed7", "#79d2d2", "#90d5b3", "#a6d9a6", "#cbe0b8", "#eff8d3", "white"]
-    },
-    labels: ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", ""],
-    hoverinfo: "label",
-  };
-
+  // Frequency between 0 and 180
   var level = parseFloat(wfreq) * 20;
+  // Trig to calculate meter point
   var degrees = 180 - level;
   var radius = 0.5;
-  var radians = degrees * Math.PI / 180;
+  var radians = (degrees * Math.PI) / 180;
   var x = radius * Math.cos(radians);
   var y = radius * Math.sin(radians);
 
-  // var mainPath = "M -.0 -0.025 L .0 0.0255 L",
-  // var pathX = String(x),
-  // var space = " ",
-  // var pathY = String(y),
-  // var pathEnd = " Z";
-  // var path = mainPath.concat(pathX, space, pathY, pathEnd);
+  // Path: may have to change to create a better triangle
+  var mainPath = 'M -.0 -0.025 L .0 0.025 L ';
+  var pathX = String(x);
+  var space = " ";
+  var pathY = String(y);
+  var pathEnd = " Z";
+  var path = mainPath.concat(pathX,space,pathY,pathEnd);
 
-  var layout = {
-    shapes:[{
-      type: "line",
-      x0: 0.5,
-      y0: 0,
-      x1: x,
-      y1: 0.5,
+  var data = [
+    {
+      type: 'scatter',
+      x: [0], 
+      y:[0],
+      marker: {size: 12, 
+        color:'850000'},
+      showlegend: false,
+      name: "Frequency",
+      text: level,
+      hoverinfo: "text+name"
+    },
+    { 
+      values: [50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50],
+      rotation: 90,
+      text: ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", ""],
+      textinfo: "text",
+      textposition: "inside",
+      marker: {
+        colors: ["#7575d7", "#758dd7", "#75a6d7", "#75bed7", "#79d2d2", "#90d5b3", "#a6d9a6", "#cbe0b8", "#eff8d3", "white"]
+      },
+      labels: ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", ""],
+      hoverinfo: "label",
+      hole: 0.5,
+      type: "pie",
+      showlegend: false
+    }
+  ];
+
+var layout = {
+  shapes:[
+    {
+      type: 'path',
+      path: path,
+      fillcolor: '850000',
       line: {
-        color: "black",
-        width: 2
+        color: '850000'
       }
-    }],
-    title: "<b>Belly Button Washing Frequency</b> <br>Scrubs per Week</br>",
-    height: 700,
-    width: 700,
-    xaxis: {visible: false, range: [-1, 1]},
-    yaxis: {visible: false, range: [-1, 1]} 
-  };
+    }
+  ],
+  title: "<b>Belly Button Washing Frequency</b> <br>Scrubs per Week</br>",
+  height: 700,
+  width: 700,
+  xaxis: {
+    zeroline:false, 
+    showticklabels:false,
+    showgrid: false, 
+    range: [-1, 1]},
+  yaxis: {
+    zeroline:false, 
+    showticklabels:false,
+    showgrid: false, 
+    range: [-1, 1]}
+};
 
-  var data = [traceA];
-
-  Plotly.newPlot(gauge, data, layout);
+Plotly.newPlot(gauge, data, layout);
 
 }
 
