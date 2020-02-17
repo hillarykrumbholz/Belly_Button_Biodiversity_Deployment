@@ -31,6 +31,8 @@ function buildMetadata(sample) {
     PANEL.append("h6").text("Location: "+result.location);
     PANEL.append("h6").text("bbtype: "+result.bbtype);
     PANEL.append("h6").text("wfreq: "+result.wfreq);
+
+    buildGauge(result.wfreq);
   
   });
 
@@ -96,20 +98,75 @@ function buildCharts(sample){
     };
 
     Plotly.newPlot("bubble", data, layout)
-
-
-
     
   });
+}
+
+// Create a gauge chart displaying belly button washing frequency of specified individual
+function buildGauge(wfreq){
+  var gauge = document.getElementById("gauge");
+
+  var traceA = {
+    type: "pie",
+    showlegend: false,
+    hole: 0.4, 
+    rotation: 90, 
+    values: [50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50],
+    text: ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", ""],
+    direction: "clockwise",
+    textinfo: "text",
+    textposition: "inside",
+    marker: {
+      colors: ["#7575d7", "#758dd7", "#75a6d7", "#75bed7", "#79d2d2", "#90d5b3", "#a6d9a6", "#cbe0b8", "#eff8d3", "white"]
+    },
+    labels: ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", ""],
+    hoverinfo: "label",
+  };
+
+  var level = parseFloat(wfreq) * 20;
+  var degrees = 180 - level;
+  var radius = 0.5;
+  var radians = degrees * Math.PI / 180;
+  var x = radius * Math.cos(radians);
+  var y = radius * Math.sin(radians);
+
+  // var mainPath = "M -.0 -0.025 L .0 0.0255 L",
+  // var pathX = String(x),
+  // var space = " ",
+  // var pathY = String(y),
+  // var pathEnd = " Z";
+  // var path = mainPath.concat(pathX, space, pathY, pathEnd);
+
+  var layout = {
+    shapes:[{
+      type: "line",
+      x0: 0.5,
+      y0: 0,
+      x1: x,
+      y1: 0.5,
+      line: {
+        color: "black",
+        width: 2
+      }
+    }],
+    title: "<b>Belly Button Washing Frequency</b> <br>Scrubs per Week</br>",
+    height: 700,
+    width: 700,
+    xaxis: {visible: false, range: [-1, 1]},
+    yaxis: {visible: false, range: [-1, 1]} 
+  };
+
+  var data = [traceA];
+
+  Plotly.newPlot(gauge, data, layout);
+
 }
 
 function optionChanged(newSample) {
   buildMetadata(newSample);
   buildCharts(newSample);
+  buildGauge(newSample);
 }
-
-
-
 
 init();
 
