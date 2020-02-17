@@ -18,9 +18,9 @@ To display a demographic information panel, where you can look up a participant 
 create a bubble chart to visualize the relative frequency of all the bacterial species found in a volunteer’s navel. 
 
 ### Coding files
-[Here](https://github.com/hillarykrumbholz/Belly_Button_Biodiversity_Deployment/blob/master/index.html) is a link to index.html.
-[Here](https://github.com/hillarykrumbholz/Belly_Button_Biodiversity_Deployment/blob/master/plots.js) is a link to the JavaScript code.
-[Here](https://github.com/hillarykrumbholz/Belly_Button_Biodiversity_Deployment/blob/master/samples.json) is a link to the JSON data file. 
+[Here](https://github.com/hillarykrumbholz/Belly_Button_Biodiversity_Deployment/blob/master/index.html) is a link to index.html.<br/>
+[Here](https://github.com/hillarykrumbholz/Belly_Button_Biodiversity_Deployment/blob/master/plots.js) is a link to the JavaScript code.<br/>
+[Here](https://github.com/hillarykrumbholz/Belly_Button_Biodiversity_Deployment/blob/master/samples.json) is a link to the JSON data file.<br/>
 
 ### Link to the deployed portfolio page:
 https://hillarykrumbholz.github.io/Belly_Button_Biodiversity_Deployment/
