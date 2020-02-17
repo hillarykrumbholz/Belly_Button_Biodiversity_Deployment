@@ -64,7 +64,7 @@ function buildCharts(sample){
     };
     var data = [trace];
     var layout = {
-      title: "Top 10 bacterial species (OTU's)",
+      title: "<b>Top 10 Bacterial Species (OTU's)</b>",
       margin: {t: 30, l: 100},
       xaxis: { title: "Sample Values"},
 
@@ -90,8 +90,8 @@ function buildCharts(sample){
 
     var data = [trace1];
     var layout = {
-      title: "All Bacterial Species per Volunteer",
-      xaxis: { title: "OTI ID" },
+      title: "<b>All Bacterial Species per Volunteer</b>",
+      xaxis: { title: "OTU ID" },
       showlegend: false,
       height: 600,
       width: 1300
@@ -115,7 +115,7 @@ function buildGauge(wfreq){
   var y = radius * Math.sin(radians);
 
   // Path: may have to change to create a better triangle
-  var mainPath = 'M -.0 -0.025 L .0 0.025 L ';
+  var mainPath = 'M -.0 -0.02 L .0 0.025 L ';
   var pathX = String(x);
   var space = " ";
   var pathY = String(y);
@@ -127,8 +127,8 @@ function buildGauge(wfreq){
       type: 'scatter',
       x: [0], 
       y:[0],
-      marker: {size: 12, 
-        color:'850000'},
+      marker: {size: 20, 
+        color: "black"},
       showlegend: false,
       name: "Frequency",
       text: level,
@@ -137,6 +137,7 @@ function buildGauge(wfreq){
     { 
       values: [50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50],
       rotation: 90,
+      direction: "clockwise",
       text: ["0-1", "1-2", "2-3", "3-4", "4-5", "5-6", "6-7", "7-8", "8-9", ""],
       textinfo: "text",
       textposition: "inside",
@@ -156,9 +157,9 @@ var layout = {
     {
       type: 'path',
       path: path,
-      fillcolor: '850000',
+      fillcolor: "black",
       line: {
-        color: '850000'
+        color: "black"
       }
     }
   ],
