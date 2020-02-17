@@ -7,6 +7,7 @@ To use Plotly.js, a JavaScript data visualization library, to create an interact
 - Data source: samples.json
 - Software: Visual Studio Code 1.40.2, JavaScript (ES6), HTML, GitHub
 - JavaScript libraries: D3
+<br/>
 
 ### Project Objective
 A microbiology lab is looking to use certain bacterial species that have the ability to synthesize proteins that taste like beef. The lab has partnered with Improbable Beef, a food startup that is wantiing to synthesize meat from a micro-organism, possibly a bacterial species that is found on the human body. Roza, a microbiologist in that lab hypothesizes the ideal bacterial species is found in the belly button. 
