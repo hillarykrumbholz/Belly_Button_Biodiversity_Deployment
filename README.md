@@ -1,7 +1,7 @@
 # Belly Button Biodiversity Deployment
 
 ## Project Overview
-To use Plotly.js, a JavaScript data visualization library, to create an interactive data visualization for the web. Completed work will then be displayed in a portfolio created for this project that is easily accessible to the public.
+To use Plotly.js, a JavaScript data visualization library, to create an interactive data visualization for the web. Completed work is then displayed in an online portfolio that is easily accessible to the public.
 
 ### Resources
 - Data source: samples.json
