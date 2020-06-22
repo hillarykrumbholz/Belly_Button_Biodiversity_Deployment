@@ -22,6 +22,7 @@ create a bubble chart to visualize the relative frequency of all the bacterial s
 [Here](https://github.com/hillarykrumbholz/Belly_Button_Biodiversity_Deployment/blob/master/plots.js) is a link to the JavaScript code.<br/>
 [Here](https://github.com/hillarykrumbholz/Belly_Button_Biodiversity_Deployment/blob/master/samples.json) is a link to the JSON data file.<br/>
 
+### Screen Capture of Webpage
 ![Screen Capture](https://github.com/hillarykrumbholz/DataVizHomework/blob/master/screencapture-hillarykrumbholz-github-io-Belly-Button-Biodiversity-Deployment-2020-06-21-20_46_00.png)
 
 ### Link to the deployed portfolio page:
