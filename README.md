@@ -17,7 +17,7 @@ People from across the country have volunteered for their navels to be tested fo
 To display a demographic information panel, where you can look up a participant by their anonymous ID number. Then to create a bar chart of the top ten bacterial species in a volunteer’s navel and to select only the most populous species, and to
 create a bubble chart to visualize the relative frequency of all the bacterial species found in a volunteer’s navel. 
 
-### Coding files
+#### Coding files
 [Here](https://github.com/hillarykrumbholz/Belly_Button_Biodiversity_Deployment/blob/master/index.html) is a link to index.html.<br/>
 [Here](https://github.com/hillarykrumbholz/Belly_Button_Biodiversity_Deployment/blob/master/plots.js) is a link to the JavaScript code.<br/>
 [Here](https://github.com/hillarykrumbholz/Belly_Button_Biodiversity_Deployment/blob/master/samples.json) is a link to the JSON data file.<br/>
